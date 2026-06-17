@@ -5,6 +5,7 @@ go 1.25.0
 require (
 	github.com/labstack/echo/v4 v4.15.4
 	github.com/manciniraka/go-common v1.0.1
+	gorm.io/gorm v1.31.1
 )
 
 require (
@@ -31,5 +32,4 @@ require (
 	golang.org/x/sys v0.46.0 // indirect
 	golang.org/x/text v0.38.0 // indirect
 	gorm.io/driver/postgres v1.6.0 // indirect
-	gorm.io/gorm v1.31.1 // indirect
 )
