@@ -22,7 +22,10 @@ func main() {
 
 	e.Validator = commonValidator.New()
 
-	router.InitRouter(e)
+	router.InitRouter(
+		e,
+		db,
+	)
 
 	port := os.Getenv("APP_PORT")
 

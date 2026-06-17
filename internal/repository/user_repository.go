@@ -27,6 +27,10 @@ func (r *userRepository) GetByEmail(email string) (*entity.User, error) {
 		First(&user).
 		Error
 
+	if err != nil {
+		return nil, err
+	}
+
 	return &user, err
 }
 

@@ -3,6 +3,7 @@ module github.com/manciniraka/medioxe
 go 1.25.0
 
 require (
+	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/labstack/echo/v4 v4.15.4
 	github.com/manciniraka/go-common v1.0.1
 	gorm.io/gorm v1.31.1

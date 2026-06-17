@@ -1,8 +1,21 @@
 package service
 
-type AuthService interface{}
+import "github.com/manciniraka/medioxe/internal/entity"
 
-type UserService interface{}
+type UserRepository interface {
+	CreateUser(user *entity.User) error
+	GetByEmail(email string) (*entity.User, error)
+	GetByID(id int) (*entity.User, error)
+}
+
+type AuthService interface {
+	Register(input RegisterInput) (*entity.User, error)
+	Login(input LoginInput) (string, error)
+}
+
+type UserService interface {
+	GetProfile(userID int) (*entity.User, error)
+}
 
 type DoctorService interface{}
 
