@@ -27,13 +27,14 @@ type DoctorRepository interface {
 	CreateDoctor(profile *entity.DoctorProfile) error
 	GetAll() ([]entity.DoctorProfile, error)
 	GetByID(id int) (*entity.DoctorProfile, error)
+	GetByUserID(userID int) (*entity.DoctorProfile, error)
 	GetBySpecialtyID(specialtyID int) ([]entity.DoctorProfile, error)
 	GetByHospitalID(hospitalID int) ([]entity.DoctorProfile, error)
 	UpdateDoctor(profile *entity.DoctorProfile) error
 }
 
 type SymptomAnalysisRepository interface {
-	Create(analysis *entity.SymptomAnalysis) error
+	CreateSymptomAnalysis(analysis *entity.SymptomAnalysis) error
 	GetByID(id int) (*entity.SymptomAnalysis, error)
 }
 
@@ -44,9 +45,16 @@ type DoctorService interface {
 	DeactivateDoctor(id int) error
 	GetDoctors(specialtyID int, hospitalID int) ([]entity.DoctorProfile, error)
 	GetDoctorByID(id int) (*entity.DoctorProfile, error)
+	GetMyProfile(userID int) (*entity.DoctorProfile, error)
+	UpdateMyProfile(userID int, input UpdateMyProfileInput) (*entity.DoctorProfile, error)
 }
 
 type ScheduleRepository interface {
+	CreateSchedule(schedule *entity.Schedule) error
+	GetByID(id int) (*entity.Schedule, error)
+	UpdateSchedule(schedule *entity.Schedule) error
+	DeleteSchedule(id int) error
+	GetByDoctorID(doctorID int) ([]entity.Schedule, error)
 	GetDoctorsBySpecialtyAndTime(
 		specialtyID int,
 		startTime string,
@@ -54,7 +62,17 @@ type ScheduleRepository interface {
 	) ([]entity.DoctorProfile, error)
 }
 
-type ScheduleService interface{}
+type ScheduleService interface {
+	CreateSchedule(userID int, input CreateScheduleInput) (*entity.Schedule, error)
+	UpdateSchedule(
+		userID int,
+		scheduleID int,
+		input UpdateScheduleInput,
+	) (*entity.Schedule, error)
+	DeleteSchedule(userID int, scheduleID int) error
+	GetMySchedules(userID int) ([]entity.Schedule, error)
+	GetDoctorSchedules(doctorID int) ([]entity.Schedule, error)
+}
 
 type AppointmentService interface{}
 

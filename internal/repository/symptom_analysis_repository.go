@@ -15,7 +15,7 @@ func NewSymptomAnalysisRepository(db *gorm.DB) *symptomAnalysisRepository {
 	}
 }
 
-func (r *symptomAnalysisRepository) Create(analysis *entity.SymptomAnalysis) error {
+func (r *symptomAnalysisRepository) CreateSymptomAnalysis(analysis *entity.SymptomAnalysis) error {
 	return r.db.Create(analysis).Error
 }
 

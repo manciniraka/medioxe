@@ -250,3 +250,48 @@ func (dc *DoctorController) GetDoctorByID(c echo.Context) error {
 		},
 	)
 }
+
+func (dc *DoctorController) GetMyProfile(c echo.Context) error {
+	userID := helper.GetUserID(c)
+
+	doctor, err := dc.doctorService.GetMyProfile(userID)
+	if err != nil {
+		return helper.InternalServerError(c, err)
+	}
+
+	return c.JSON(
+		http.StatusOK,
+		echo.Map{
+			"message": "doctor profile fetched succesfully",
+			"data":    doctor,
+		},
+	)
+}
+
+func (dc *DoctorController) UpdateMyProfile(c echo.Context) error {
+	var input service.UpdateMyProfileInput
+
+	if err := c.Bind(&input); err != nil {
+		return c.JSON(
+			http.StatusBadRequest,
+			echo.Map{
+				"message": "invalid request body",
+			},
+		)
+	}
+
+	userID := helper.GetUserID(c)
+
+	doctor, err := dc.doctorService.UpdateMyProfile(userID, input)
+	if err != nil {
+		return helper.InternalServerError(c, err)
+	}
+
+	return c.JSON(
+		http.StatusOK,
+		echo.Map{
+			"message": "doctor profile fetched succesfully",
+			"data":    doctor,
+		},
+	)
+}

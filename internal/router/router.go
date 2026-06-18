@@ -29,6 +29,9 @@ func InitRouter(
 	doctorService := service.NewDoctorService(doctorRepo, userRepo)
 	doctorController := controller.NewDoctorController(doctorService)
 
+	scheduleService := service.NewScheduleService(scheduleRepo, doctorRepo)
+	scheduleController := controller.NewScheduleController(scheduleService)
+
 	geminiClient := geminiai.NewGeminiClient()
 
 	aiService := service.NewAIService(
@@ -49,9 +52,12 @@ func InitRouter(
 	auth.Use(middleware.AuthMiddleware)
 
 	auth.GET("/profile", userController.GetProfile)
+
 	auth.GET("/doctors", doctorController.GetDoctors)
 
 	auth.GET("/doctors/:id", doctorController.GetDoctorByID)
+
+	auth.GET("/doctors/:id", scheduleController.GetDoctorSchedules)
 
 	patient := e.Group("")
 
@@ -72,8 +78,20 @@ func InitRouter(
 	admin.POST("/doctors", doctorController.CreateDoctor)
 
 	admin.PUT("/doctors/:id", doctorController.UpdateDoctor)
-
 	admin.PATCH("/doctors/:id/activate", doctorController.ActivateDoctor)
-
 	admin.PATCH("/doctors/:id/deactivate", doctorController.DeactivateDoctor)
+
+	doctor := e.Group("")
+	doctor.Use(
+		middleware.AuthMiddleware,
+		middleware.RoleMiddleware("doctor"),
+	)
+
+	doctor.GET("/doctor/profile", doctorController.GetMyProfile)
+	doctor.PUT("/doctor/profile", doctorController.UpdateMyProfile)
+	doctor.POST("/doctor/schedule", scheduleController.CreateSchedule)
+	doctor.GET("/doctor/schedules", scheduleController.GetMySchedules)
+	doctor.PUT("/doctor/schedule/:id", scheduleController.UpdateSchedule)
+	doctor.DELETE("/doctor/schedule/:id", scheduleController.DeleteSchedule)
+
 }

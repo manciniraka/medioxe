@@ -31,6 +31,11 @@ type doctorService struct {
 	userRepo   UserRepository
 }
 
+type UpdateMyProfileInput struct {
+	Bio             string `json:"bio"`
+	ConsultationFee int    `json:"consultation_fee"`
+}
+
 func NewDoctorService(
 	doctorRepo DoctorRepository,
 	userRepo UserRepository,
@@ -160,4 +165,30 @@ func (s *doctorService) GetDoctors(specialtyID int, hospitalID int) ([]entity.Do
 
 func (s *doctorService) GetDoctorByID(id int) (*entity.DoctorProfile, error) {
 	return s.doctorRepo.GetByID(id)
+}
+
+func (s *doctorService) GetMyProfile(userID int) (*entity.DoctorProfile, error) {
+	return s.doctorRepo.GetByUserID(userID)
+}
+
+func (s *doctorService) UpdateMyProfile(userID int, input UpdateMyProfileInput) (*entity.DoctorProfile, error) {
+	doctor, err := s.doctorRepo.GetByUserID(userID)
+	if err != nil {
+		return nil, err
+	}
+
+	if input.Bio != "" {
+		doctor.Bio = input.Bio
+	}
+
+	if input.ConsultationFee > 0 {
+		doctor.ConsultationFee = input.ConsultationFee
+	}
+
+	err = s.doctorRepo.UpdateDoctor(doctor)
+	if err != nil {
+		return nil, err
+	}
+
+	return doctor, nil
 }

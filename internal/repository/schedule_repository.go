@@ -38,6 +38,19 @@ func (r *scheduleRepository) DeleteSchedule(id int) error {
 	return r.db.Delete(&entity.Schedule{}, id).Error
 }
 
+func (r *scheduleRepository) GetByDoctorID(doctorID int) ([]entity.Schedule, error) {
+	var schedules []entity.Schedule
+
+	err := r.db.
+		Where("doctor_id = ?", doctorID).
+		Order("date ASC").
+		Order("start_time ASC").
+		Find(&schedules).
+		Error
+
+	return schedules, err
+}
+
 func (r *scheduleRepository) GetDoctorsBySpecialtyAndTime(
 	specialtyID int,
 	startTime string,
@@ -47,9 +60,6 @@ func (r *scheduleRepository) GetDoctorsBySpecialtyAndTime(
 	err := r.db.
 		Model(&entity.DoctorProfile{}).
 		Distinct().
-		Preload("User").
-		Preload("Specialty").
-		Preload("Hospital").
 		Joins(
 			"JOIN schedules ON schedules.doctor_id = doctor_profiles.id",
 		).

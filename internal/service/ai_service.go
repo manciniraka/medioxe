@@ -87,7 +87,7 @@ func (s *aiService) AnalyzeSymptoms(
 		AISummary:              geminiResult.Summary,
 	}
 
-	err = s.symptomAnalysisRepo.Create(&analysis)
+	err = s.symptomAnalysisRepo.CreateSymptomAnalysis(&analysis)
 
 	if err != nil {
 		return nil, err

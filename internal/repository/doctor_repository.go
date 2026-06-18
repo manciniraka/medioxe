@@ -46,6 +46,17 @@ func (r *doctorRepository) GetByID(id int) (*entity.DoctorProfile, error) {
 	return &doctor, err
 }
 
+func (r *doctorRepository) GetByUserID(userID int) (*entity.DoctorProfile, error) {
+	var doctor entity.DoctorProfile
+
+	err := r.db.
+		Where("user_id = ?", userID).
+		First(&doctor).
+		Error
+
+	return &doctor, err
+}
+
 func (r *doctorRepository) GetBySpecialtyID(specialtyID int) ([]entity.DoctorProfile, error) {
 	var doctors []entity.DoctorProfile
 
