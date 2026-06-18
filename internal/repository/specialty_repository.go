@@ -34,3 +34,18 @@ func (r *specialtyRepository) GetByID(id int) (*entity.Specialty, error) {
 
 	return &specialty, err
 }
+
+func (r *specialtyRepository) GetByName(name string) (*entity.Specialty, error) {
+	var specialty entity.Specialty
+
+	err := r.db.
+		Where("name = ?", name).
+		First(&specialty).
+		Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &specialty, nil
+}

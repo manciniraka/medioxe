@@ -10,7 +10,7 @@ type DoctorProfile struct {
 	ExperienceYears int       `json:"experience_years"`
 	ConsultationFee int       `json:"consultation_fee"`
 	Bio             string    `json:"bio"`
-	IsActive        string    `json:"is_active"`
+	IsActive        bool      `json:"is_active"`
 	CreatedAt       time.Time `json:"created_at"`
 	UpdatedAt       time.Time `json:"updated_at"`
 }

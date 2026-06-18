@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS symptom_analyses (
     patient_id INT NOT NULL REFERENCES users(id),
     symptoms TEXT NOT NULL,
     recommended_specialty_id INT NOT NULL REFERENCES specialties(id),
-    recommended_doctor_id INT NOT NULL REFERENCES doctor_profiles(id),
+    recommended_doctor_id INT REFERENCES doctor_profiles(id),
     ai_summary    TEXT NOT NULL,
     created_at  TIMESTAMP NOT NULL DEFAULT NOW()
 );

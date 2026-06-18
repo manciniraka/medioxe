@@ -15,7 +15,7 @@ func NewDoctorRepository(db *gorm.DB) *doctorRepository {
 	}
 }
 
-func (r *doctorRepository) Createdoctor(profile *entity.DoctorProfile) error {
+func (r *doctorRepository) CreateDoctor(profile *entity.DoctorProfile) error {
 	return r.db.Create(profile).Error
 }
 
@@ -50,9 +50,6 @@ func (r *doctorRepository) GetBySpecialtyID(specialtyID int) ([]entity.DoctorPro
 	var doctors []entity.DoctorProfile
 
 	err := r.db.
-		Preload("User").
-		Preload("Specialty").
-		Preload("Hospital").
 		Where("specialty_id = ?", specialtyID).
 		Where("is_active = ?", true).
 		Find(&doctors).
@@ -76,6 +73,6 @@ func (r *doctorRepository) GetByHospitalID(hospitalID int) ([]entity.DoctorProfi
 	return doctors, err
 }
 
-func (r *doctorRepository) Updatedoctor(profile *entity.DoctorProfile) error {
+func (r *doctorRepository) UpdateDoctor(profile *entity.DoctorProfile) error {
 	return r.db.Save(profile).Error
 }

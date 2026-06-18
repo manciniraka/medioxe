@@ -12,6 +12,6 @@ type SymptomAnalysis struct {
 	CreatedAt              time.Time `json:"created_at"`
 
 	Patient              User           `json:"patient" gorm:"foreignKey:PatientID"`
-	RecommendedSpecialty Specialty      `json:"recommended_specialty" gorm:"foreignKey:RecommendedPatientID"`
+	RecommendedSpecialty Specialty      `json:"recommended_specialty" gorm:"foreignKey:RecommendedSpecialtyID"`
 	RecommendedDoctor    *DoctorProfile `json:"recommended_doctor" gorm:"foreignKey:RecommendedDoctorID"`
 }

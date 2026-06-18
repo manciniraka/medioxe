@@ -37,3 +37,47 @@ func (r *scheduleRepository) UpdateSchedule(schedule *entity.Schedule) error {
 func (r *scheduleRepository) DeleteSchedule(id int) error {
 	return r.db.Delete(&entity.Schedule{}, id).Error
 }
+
+func (r *scheduleRepository) GetDoctorsBySpecialtyAndTime(
+	specialtyID int,
+	startTime string,
+	endTime string,
+) ([]entity.DoctorProfile, error) {
+	var doctors []entity.DoctorProfile
+	err := r.db.
+		Model(&entity.DoctorProfile{}).
+		Distinct().
+		Preload("User").
+		Preload("Specialty").
+		Preload("Hospital").
+		Joins(
+			"JOIN schedules ON schedules.doctor_id = doctor_profiles.id",
+		).
+		Where(
+			"doctor_profiles.specialty_id = ?",
+			specialtyID,
+		).
+		Where(
+			"doctor_profiles.is_active = ?",
+			true,
+		).
+		Where("schedules.is_booked = ?",
+			false,
+		).
+		Where(
+			"schedules.start_time >= ?",
+			startTime,
+		).
+		Where(
+			"schedules.end_time <= ?",
+			endTime,
+		).
+		Find(&doctors).
+		Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return doctors, nil
+}
