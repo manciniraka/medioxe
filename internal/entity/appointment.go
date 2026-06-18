@@ -4,7 +4,7 @@ import "time"
 
 type Appointment struct {
 	ID                int       `json:"id" gorm:"primaryKey"`
-	SpecialtyID       int       `json:"specialty_id"`
+	PatientID         int       `json:"patient_id"`
 	DoctorID          int       `json:"doctor_id"`
 	ScheduleID        int       `json:"schedule_id"`
 	SymptomAnalysisID *int      `json:"symptom_analysis_id"`

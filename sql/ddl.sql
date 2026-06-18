@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS appointments (
     patient_id INT NOT NULL REFERENCES users(id),
     doctor_id INT NOT NULL REFERENCES doctor_profiles(id),
     schedule_id INT NOT NULL REFERENCES schedules(id),
-    symptom_analysis_id INT NOT NULL REFERENCES symptom_analyses(id),
+    symptom_analysis_id INT REFERENCES symptom_analyses(id),
     notes TEXT,
     status VARCHAR(50) NOT NULL,
     created_at  TIMESTAMP NOT NULL DEFAULT NOW(),

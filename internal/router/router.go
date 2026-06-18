@@ -19,6 +19,7 @@ func InitRouter(
 	doctorRepo := repository.NewDoctorRepository(db)
 	scheduleRepo := repository.NewScheduleRepository(db)
 	symptomAnalysisRepo := repository.NewSymptomAnalysisRepository(db)
+	appointmentRepo := repository.NewAppointmentRepository(db)
 
 	authService := service.NewAuthService(userRepo)
 	authController := controller.NewAuthController(authService)
@@ -31,6 +32,13 @@ func InitRouter(
 
 	scheduleService := service.NewScheduleService(scheduleRepo, doctorRepo)
 	scheduleController := controller.NewScheduleController(scheduleService)
+
+	appointmentService := service.NewAppointmentService(
+		appointmentRepo,
+		scheduleRepo,
+		doctorRepo,
+	)
+	appointmentController := controller.NewAppointmentController(appointmentService)
 
 	geminiClient := geminiai.NewGeminiClient()
 
@@ -68,6 +76,10 @@ func InitRouter(
 
 	patient.POST("/geminiai/symptom-analysis", aiController.AnalyzeSymptoms)
 
+	patient.POST("/appointments", appointmentController.CreateAppointment)
+
+	patient.GET("/appointments", appointmentController.GetMyAppointments)
+
 	admin := e.Group("/admin")
 
 	admin.Use(
@@ -88,10 +100,21 @@ func InitRouter(
 	)
 
 	doctor.GET("/doctor/profile", doctorController.GetMyProfile)
+
 	doctor.PUT("/doctor/profile", doctorController.UpdateMyProfile)
+
 	doctor.POST("/doctor/schedule", scheduleController.CreateSchedule)
+
 	doctor.GET("/doctor/schedules", scheduleController.GetMySchedules)
+
 	doctor.PUT("/doctor/schedule/:id", scheduleController.UpdateSchedule)
+
 	doctor.DELETE("/doctor/schedule/:id", scheduleController.DeleteSchedule)
+
+	doctor.GET("/doctor/appointments", appointmentController.GetDoctorAppointments)
+
+	doctor.PATCH("/doctor/appointments/:id/confirm", appointmentController.ConfirmAppointment)
+	doctor.PATCH("/doctor/appointments/:id/complete", appointmentController.CompleteAppointment)
+	doctor.PATCH("/doctor/appointments/:id/cancel", appointmentController.CancelAppointment)
 
 }

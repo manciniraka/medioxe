@@ -74,7 +74,22 @@ type ScheduleService interface {
 	GetDoctorSchedules(doctorID int) ([]entity.Schedule, error)
 }
 
-type AppointmentService interface{}
+type AppointmentRepository interface {
+	CreateAppointment(appointment *entity.Appointment) error
+	GetByID(id int) (*entity.Appointment, error)
+	GetByPatientID(patientID int) ([]entity.Appointment, error)
+	GetByDoctorID(doctorID int) ([]entity.Appointment, error)
+	UpdateAppointment(appointment *entity.Appointment) error
+}
+
+type AppointmentService interface{
+	CreateAppointment(patientID int, input CreateAppointmentInput) (*entity.Appointment, error)
+	GetMyAppointments(patientID int) ([]entity.Appointment, error)
+	GetDoctorAppointments(userID int) ([]entity.Appointment, error)
+	ConfirmAppointment(userID int, appointmentID int) error		
+	CompleteAppointment(userID int, appointmentID int) error
+	CancelAppointment(userID int, appointmentID int) error
+}
 
 type PaymentService interface{}
 
