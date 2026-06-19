@@ -12,3 +12,11 @@ VALUES
 ('Dokter Kandungan'),
 ('Dokter Bedah'),
 ('Dokter Paru');
+
+INSERT INTO hospitals (name, address) 
+VALUES
+('Mayapada Hospital Tangerang', 'Tangerang, Tangerang'),
+('RSIA Bunda Jakarta', 'Menteng, Jakarta'),
+('RSU Bunda Margonda', 'Beji, Depok'),
+('Alia Hospital Depok', 'Pancoran Mas, Depok'),
+('MRCCC Siloam Hospitals Semanggi', 'Setiabudi, Jakarta');

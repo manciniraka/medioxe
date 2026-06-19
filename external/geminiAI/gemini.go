@@ -112,7 +112,9 @@ func (g *GeminiClient) AnalyzeSymptoms(symptoms string) (*GeminiResponse, error)
 	}
 
 	url := fmt.Sprintf(
-		"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=%s",
+		"%s/v1beta/models/%s:generateContent?key=%s",
+		os.Getenv("GEMINI_BASE_URL"),
+		os.Getenv("GEMINI_MODEL"),
 		os.Getenv("GEMINI_API_KEY"),
 	)
 

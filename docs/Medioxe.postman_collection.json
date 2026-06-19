@@ -1,0 +1,2465 @@
+{
+  "info": {
+    "_postman_id": "9b82c0b0-7503-47ea-9d6f-6ddd4efb243e",
+    "name": "Medioxe",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27897753"
+  },
+  "item": [
+    {
+      "name": "Admin Role",
+      "item": [
+        {
+          "name": "Create Doctors",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoyfQ.se0sJILCfPt68d1tX-TYagyNxfpI6BgcsvNSVN0KHac",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"full_name\": \"dr.Raka Mancini\",\r\n  \"email\": \"test@medioxe.com\",\r\n  \"password\": \"password123\",\r\n  \"specialty_id\": 1,\r\n  \"hospital_id\": 1,\r\n  \"experience_years\": -1,\r\n  \"consultation_fee\": -200000,\r\n  \"bio\": \"dr. Raka Mancini\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/doctors",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "doctors"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "201 Success Created Doctor",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"full_name\": \"dr. Nana Agustina, Sp.OG\",\r\n  \"email\": \"nana@medioxe.com\",\r\n  \"password\": \"password123\",\r\n  \"specialty_id\": 10,\r\n  \"hospital_id\": 2,\r\n  \"experience_years\": 19,\r\n  \"consultation_fee\": 500000,\r\n  \"bio\": \"dr. Nana Agustina dapat memberikan bantuan pelayanan medis terkait konsultasi mengenai kesehatan Kebidanan dan Kandungan. Beliau juga merupakan Dokter yang terdaftar sebagai anggota dari Ikatan Dokter Indonesia (IDI) dan Perkumpulan Obstetri dan Ginekologi Indonesia (POGI).\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/doctors",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "doctors"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 01:36:42 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1017"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 2,\n        \"user_id\": 4,\n        \"specialty_id\": 10,\n        \"hospital_id\": 2,\n        \"experience_years\": 19,\n        \"consultation_fee\": 500000,\n        \"bio\": \"dr. Nana Agustina dapat memberikan bantuan pelayanan medis terkait konsultasi mengenai kesehatan Kebidanan dan Kandungan. Beliau juga merupakan Dokter yang terdaftar sebagai anggota dari Ikatan Dokter Indonesia (IDI) dan Perkumpulan Obstetri dan Ginekologi Indonesia (POGI).\",\n        \"is_active\": true,\n        \"created_at\": \"2026-06-19T08:36:41.278599Z\",\n        \"updated_at\": \"2026-06-19T08:36:41.278599Z\",\n        \"user\": {\n            \"id\": 4,\n            \"full_name\": \"dr. Nana Agustina, Sp.OG\",\n            \"email\": \"nana@medioxe.com\",\n            \"role\": \"doctor\",\n            \"created_at\": \"2026-06-19T08:36:40.927372Z\",\n            \"updated_at\": \"2026-06-19T08:36:40.927372Z\"\n        },\n        \"specialty\": {\n            \"id\": 10,\n            \"name\": \"Dokter Kandungan\",\n            \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n            \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n        },\n        \"hospital\": {\n            \"id\": 2,\n            \"name\": \"RSIA Bunda Jakarta\",\n            \"address\": \"Menteng, Jakarta\",\n            \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n            \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n        }\n    },\n    \"message\": \"doctor created successfully\"\n}"
+            },
+            {
+              "name": "400 Email already registered",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"full_name\": \"dr.Raka Mancini\",\r\n  \"email\": \"dayu@medioxe.com\",\r\n  \"password\": \"password123\",\r\n  \"specialty_id\": 1,\r\n  \"hospital_id\": 1,\r\n  \"experience_years\": 1,\r\n  \"consultation_fee\": 200000,\r\n  \"bio\": \"dr. Raka Mancini\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/doctors",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "doctors"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:09:33 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "39"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"email already registered\"\n}"
+            },
+            {
+              "name": "400 Specialty not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"full_name\": \"dr.Raka Mancini\",\r\n  \"email\": \"test@medioxe.com\",\r\n  \"password\": \"password123\",\r\n  \"specialty_id\": 20,\r\n  \"hospital_id\": 1,\r\n  \"experience_years\": 1,\r\n  \"consultation_fee\": 200000,\r\n  \"bio\": \"dr. Raka Mancini\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/doctors",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "doctors"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:40:41 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "34"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"specialty not found\"\n}"
+            },
+            {
+              "name": "400 Hospital not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"full_name\": \"dr.Raka Mancini\",\r\n  \"email\": \"test@medioxe.com\",\r\n  \"password\": \"password123\",\r\n  \"specialty_id\": 1,\r\n  \"hospital_id\": 122,\r\n  \"experience_years\": 1,\r\n  \"consultation_fee\": 200000,\r\n  \"bio\": \"dr. Raka Mancini\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/doctors",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "doctors"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:41:02 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "33"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"hospital not found\"\n}"
+            },
+            {
+              "name": "400 gt tag validation for Exp Years and Consultation Fee",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"full_name\": \"dr.Raka Mancini\",\r\n  \"email\": \"test@medioxe.com\",\r\n  \"password\": \"password123\",\r\n  \"specialty_id\": 1,\r\n  \"hospital_id\": 1,\r\n  \"experience_years\": -1,\r\n  \"consultation_fee\": -200000,\r\n  \"bio\": \"dr. Raka Mancini\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/doctors",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "doctors"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:44:49 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "234"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Key: 'CreateDoctorInput.ExperienceYears' Error:Field validation for 'ExperienceYears' failed on the 'gte' tag\\nKey: 'CreateDoctorInput.ConsultationFee' Error:Field validation for 'ConsultationFee' failed on the 'gt' tag\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Doctor",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/doctors/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "doctors",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"specialty_id\": 6,\r\n    \"hospital_id\": 3,\r\n    \"experience_years\": 0,\r\n    \"consultation_fee\": 0,\r\n    \"bio\": \"currently advancing medical studies\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin/doctors/6",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "doctors",
+                    "6"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:56:35 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "792"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 6,\n        \"user_id\": 8,\n        \"specialty_id\": 9,\n        \"hospital_id\": 5,\n        \"experience_years\": 5,\n        \"consultation_fee\": 300000,\n        \"bio\": \"currently advancing medical studies\",\n        \"is_active\": true,\n        \"created_at\": \"2026-06-19T08:47:43.27189Z\",\n        \"updated_at\": \"2026-06-19T14:56:35.309565Z\",\n        \"user\": {\n            \"id\": 8,\n            \"full_name\": \"dr. Amalia Yuliasari, Sp.THT-KL\",\n            \"email\": \"amalia@medioxe.com\",\n            \"role\": \"doctor\",\n            \"created_at\": \"2026-06-19T08:47:43.012824Z\",\n            \"updated_at\": \"2026-06-19T08:47:43.012824Z\"\n        },\n        \"specialty\": {\n            \"id\": 9,\n            \"name\": \"Dokter THT\",\n            \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n            \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n        },\n        \"hospital\": {\n            \"id\": 5,\n            \"name\": \"MRCCC Siloam Hospitals Semanggi\",\n            \"address\": \"Setiabudi, Jakarta\",\n            \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n            \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n        }\n    },\n    \"message\": \"doctor updated successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Activate Doctor",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoyfQ.se0sJILCfPt68d1tX-TYagyNxfpI6BgcsvNSVN0KHac",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/doctors/6/activate",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "doctors",
+                "6",
+                "activate"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Activate",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/doctors/6/activate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "doctors",
+                    "6",
+                    "activate"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 08:02:11 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "44"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"doctor activated successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Deactivate Doctor",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoyfQ.se0sJILCfPt68d1tX-TYagyNxfpI6BgcsvNSVN0KHac",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/doctors/6/deactivate",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "doctors",
+                "6",
+                "deactivate"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Deactivate",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/doctors/6/deactivate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "doctors",
+                    "6",
+                    "deactivate"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 08:01:29 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "46"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"doctor deactivated successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Appointment Histories",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoyfQ.se0sJILCfPt68d1tX-TYagyNxfpI6BgcsvNSVN0KHac",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/appointment-histories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "appointment-histories"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 success get appointment history",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin/appointment-histories",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "appointment-histories"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 08:27:50 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "433"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"appointment_id\": 4,\n            \"status\": \"pending\",\n            \"remarks\": \"Appointment created\",\n            \"created_at\": \"2026-06-19T15:27:14.514284Z\",\n            \"appointment\": {\n                \"id\": 4,\n                \"patient_id\": 1,\n                \"doctor_id\": 2,\n                \"schedule_id\": 6,\n                \"symptom_analysis_id\": null,\n                \"notes\": \"sakit mata\",\n                \"status\": \"pending\",\n                \"created_at\": \"2026-06-19T15:27:14.160717Z\",\n                \"updated_at\": \"2026-06-19T15:27:14.160717Z\",\n                \"symptom_analysis\": null\n            }\n        }\n    ],\n    \"message\": \"appointment histories fetched successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Doctor Role",
+      "item": [
+        {
+          "name": "Get Doctor Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6OX0.xm7dORAdQRrdIkrNr94LFfZlCgfaP8wjD-kvcwSPBao",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/doctor/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Get Profile",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:47:04 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "296"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 7,\n        \"user_id\": 9,\n        \"specialty_id\": 4,\n        \"hospital_id\": 1,\n        \"experience_years\": 26,\n        \"consultation_fee\": 300000,\n        \"bio\": \"hello im your cardiologist\",\n        \"is_active\": true,\n        \"created_at\": \"2026-06-19T08:54:29.493551Z\",\n        \"updated_at\": \"2026-06-19T14:38:26.830276Z\"\n    },\n    \"message\": \"doctor profile fetched succesfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Own Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6OX0.xm7dORAdQRrdIkrNr94LFfZlCgfaP8wjD-kvcwSPBao",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"bio\": \"hello im your cardiologist\",\r\n    \"consultation_fee\": 0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/doctor/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Update Profile",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"bio\": \"hello im your cardiologist\",\r\n    \"consultation_fee\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/doctor/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:49:52 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "302"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 7,\n        \"user_id\": 9,\n        \"specialty_id\": 4,\n        \"hospital_id\": 1,\n        \"experience_years\": 26,\n        \"consultation_fee\": 300000,\n        \"bio\": \"hello im your cardiologist\",\n        \"is_active\": true,\n        \"created_at\": \"2026-06-19T08:54:29.493551Z\",\n        \"updated_at\": \"2026-06-19T14:49:51.8532888+07:00\"\n    },\n    \"message\": \"doctor profile fetched succesfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Schedule",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6MTJ9.mmjVA9j64kjJKU6nyDv0SzHZo-hQfIl5MpJ51i14eNc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"date\": \"2026-06-22T00:00:00Z\",\r\n  \"start_time\": \"14:00\",\r\n  \"end_time\": \"15:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/doctor/schedules",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "schedules"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "401 invalid token",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"date\": \"2026-06-25T00:00:00Z\",\r\n  \"start_time\": \"13:00\",\r\n  \"end_time\": \"14:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/doctor/schedules",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "schedules"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 02:31:31 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "28"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"invalid token\"\n}"
+            },
+            {
+              "name": "401 missing token",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"date\": \"2026-06-25T00:00:00Z\",\r\n  \"start_time\": \"13:00\",\r\n  \"end_time\": \"14:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/doctor/schedules",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "schedules"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 02:32:05 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "28"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"missing token\"\n}"
+            },
+            {
+              "name": "201 Success Created Schedule",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"date\": \"2026-06-22T00:00:00Z\",\r\n  \"start_time\": \"14:00\",\r\n  \"end_time\": \"15:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/doctor/schedules",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "schedules"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 02:38:31 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "807"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 30,\n        \"doctor_id\": 6,\n        \"date\": \"2026-06-22T00:00:00Z\",\n        \"start_time\": \"14:00\",\n        \"end_time\": \"15:00\",\n        \"is_booked\": false,\n        \"created_at\": \"2026-06-19T09:38:31.1493607+07:00\",\n        \"updated_at\": \"2026-06-19T09:38:31.1493607+07:00\",\n        \"doctor\": {\n            \"id\": 0,\n            \"user_id\": 0,\n            \"specialty_id\": 0,\n            \"hospital_id\": 0,\n            \"experience_years\": 0,\n            \"consultation_fee\": 0,\n            \"bio\": \"\",\n            \"is_active\": false,\n            \"created_at\": \"0001-01-01T00:00:00Z\",\n            \"updated_at\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": 0,\n                \"full_name\": \"\",\n                \"email\": \"\",\n                \"role\": \"\",\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"specialty\": {\n                \"id\": 0,\n                \"name\": \"\",\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"hospital\": {\n                \"id\": 0,\n                \"name\": \"\",\n                \"address\": \"\",\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            }\n        }\n    },\n    \"message\": \"schedule created successfully\"\n}"
+            },
+            {
+              "name": "400 schedule date in the past",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"date\": \"2026-06-02T00:00:00Z\",\r\n  \"start_time\": \"14:00\",\r\n  \"end_time\": \"15:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/doctor/schedules",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "schedules"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:56:03 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "50"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"schedule date cannot be in the past\"\n}"
+            },
+            {
+              "name": "400 EndTime <= StartTime",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"date\": \"2026-06-22T00:00:00Z\",\r\n  \"start_time\": \"15:00\",\r\n  \"end_time\": \"15:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/doctor/schedules",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "schedules"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:56:26 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "55"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"end time must be greater than start time\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Own Schedules",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6OX0.xm7dORAdQRrdIkrNr94LFfZlCgfaP8wjD-kvcwSPBao",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/doctor/schedules",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "schedules"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Get Schedules",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/schedules",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "schedules"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:44:12 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "458"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": 26,\n            \"doctor_id\": 7,\n            \"date\": \"2026-06-25T00:00:00Z\",\n            \"start_time\": \"10:00:00\",\n            \"end_time\": \"11:00:00\",\n            \"is_booked\": true,\n            \"created_at\": \"2026-06-19T09:36:38.324107Z\",\n            \"updated_at\": \"2026-06-19T14:00:41.18664Z\"\n        },\n        {\n            \"id\": 27,\n            \"doctor_id\": 7,\n            \"date\": \"2026-06-27T00:00:00Z\",\n            \"start_time\": \"19:00:00\",\n            \"end_time\": \"20:00:00\",\n            \"is_booked\": true,\n            \"created_at\": \"2026-06-19T09:36:48.618754Z\",\n            \"updated_at\": \"2026-06-19T09:53:31.758347Z\"\n        }\n    ],\n    \"message\": \"schedule fetched successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Schedule",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6OX0.xm7dORAdQRrdIkrNr94LFfZlCgfaP8wjD-kvcwSPBao",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"date\": \"2026-06-22T00:00:00Z\",\r\n  \"start_time\": \"15:00\",\r\n  \"end_time\": \"15:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/doctor/schedules/28",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "schedules",
+                "28"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"date\": \"2026-06-22T00:00:00Z\",\r\n  \"start_time\": \"13:00\",\r\n  \"end_time\": \"14:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/doctor/schedules/26",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "schedules",
+                    "26"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:46:25 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "503"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 26,\n        \"doctor_id\": 7,\n        \"date\": \"2026-06-22T00:00:00Z\",\n        \"start_time\": \"13:00\",\n        \"end_time\": \"14:00\",\n        \"is_booked\": true,\n        \"created_at\": \"2026-06-19T09:36:38.324107Z\",\n        \"updated_at\": \"2026-06-19T14:46:25.4694006+07:00\",\n        \"doctor\": {\n            \"id\": 7,\n            \"user_id\": 9,\n            \"specialty_id\": 4,\n            \"hospital_id\": 1,\n            \"experience_years\": 26,\n            \"consultation_fee\": 300000,\n            \"bio\": \"hello im your cardiologist\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T08:54:29.493551Z\",\n            \"updated_at\": \"2026-06-19T14:38:26.830276Z\"\n        }\n    },\n    \"message\": \"schedule updated successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Schedule",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6OX0.xm7dORAdQRrdIkrNr94LFfZlCgfaP8wjD-kvcwSPBao",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/doctor/schedules/28",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "schedules",
+                "28"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Delete",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/schedules/28",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "schedules",
+                    "28"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:15:30 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "44"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"schedule deleted successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Own Appointments",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6OX0.xm7dORAdQRrdIkrNr94LFfZlCgfaP8wjD-kvcwSPBao",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/doctor/appointments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "appointments"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Get Appointments",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/appointments",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "appointments"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:49:09 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "557"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": 2,\n            \"patient_id\": 13,\n            \"doctor_id\": 7,\n            \"schedule_id\": 26,\n            \"symptom_analysis_id\": 4,\n            \"notes\": \"nyeri dada saat berolahraga\",\n            \"status\": \"completed\",\n            \"created_at\": \"2026-06-19T14:00:40.389949Z\",\n            \"updated_at\": \"2026-06-19T14:31:11.257165Z\",\n            \"symptom_analysis\": null\n        },\n        {\n            \"id\": 1,\n            \"patient_id\": 13,\n            \"doctor_id\": 7,\n            \"schedule_id\": 27,\n            \"symptom_analysis_id\": null,\n            \"notes\": \"nyeri dada saat berolahraga\",\n            \"status\": \"cancelled\",\n            \"created_at\": \"2026-06-19T09:53:31.210259Z\",\n            \"updated_at\": \"2026-06-19T14:35:54.286473Z\",\n            \"symptom_analysis\": null\n        }\n    ],\n    \"message\": \"appointment fetched successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Confirm Appointments",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6OX0.xm7dORAdQRrdIkrNr94LFfZlCgfaP8wjD-kvcwSPBao",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/doctor/appointments/2/confirm",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "appointments",
+                "2",
+                "confirm"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "400 invalid AppointmentID",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/appointments/29/confirm",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "appointments",
+                    "29",
+                    "confirm"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:28:15 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "36"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"appointment not found\"\n}"
+            },
+            {
+              "name": "200 Success confirm",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/appointments/2/confirm",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "appointments",
+                    "2",
+                    "confirm"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:28:42 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "49"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"appointment confirmed successfully\"\n}"
+            },
+            {
+              "name": "400 Appointment already processed",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/appointments/2/confirm",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "appointments",
+                    "2",
+                    "confirm"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:29:04 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "44"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"appointment already processed\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Complete Appointment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6OX0.xm7dORAdQRrdIkrNr94LFfZlCgfaP8wjD-kvcwSPBao",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/doctor/appointments/2/complete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "appointments",
+                "2",
+                "complete"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200  Success Complete Appointment",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/appointments/2/complete",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "appointments",
+                    "2",
+                    "complete"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:31:12 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "49"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"appointment Completed successfully\"\n}"
+            },
+            {
+              "name": "400 Appointment not yet confirmed",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/appointments/1/complete",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "appointments",
+                    "1",
+                    "complete"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:34:20 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "50"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"appointment must be confirmed first\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Cancel Appointments",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9jdG9yIiwidXNlcl9pZCI6OX0.xm7dORAdQRrdIkrNr94LFfZlCgfaP8wjD-kvcwSPBao",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/doctor/appointments/1/cancel",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctor",
+                "appointments",
+                "1",
+                "cancel"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "400 cannot cancel completed appointments",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/appointments/2/cancel",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "appointments",
+                    "2",
+                    "cancel"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:35:28 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "56"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"completed appointment cannot be cancelled\"\n}"
+            },
+            {
+              "name": "200 Canceled appointments",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctor/appointments/1/cancel",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctor",
+                    "appointments",
+                    "1",
+                    "cancel"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:35:55 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "49"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"appointment cancelled successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Patient Role",
+      "item": [
+        {
+          "name": "User Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicGF0aWVudCIsInVzZXJfaWQiOjF9.2rtN5gXbv9SZKUAErXDDl5mP4i8b2vzCnRC3-1QTmvM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 User Profile",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 07:58:30 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "212"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"full_name\": \"Raka Mancini\",\n        \"email\": \"raka@example.com\",\n        \"role\": \"patient\",\n        \"created_at\": \"2026-06-18T14:33:17.783829Z\",\n        \"updated_at\": \"2026-06-18T14:33:17.783829Z\"\n    },\n    \"message\": \"get profile data success\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "AI Symptom Analysis",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicGF0aWVudCIsInVzZXJfaWQiOjEzfQ.c9lVos9rQTySIE0bD3wWWiZaGE0JIKIX0oti2JfBTgA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"symptoms\": \"Saya sering nyeri dada saat berolahraga\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/geminiai/symptom-analysis",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "geminiai",
+                "symptom-analysis"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Symptom Analysis",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"symptoms\": \"Telinga saya berdengung setelah terbentur meja\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/geminiai/symptom-analysis",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "geminiai",
+                    "symptom-analysis"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 08:11:12 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1008"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"analysis_id\": 13,\n        \"recommended_specialty\": {\n            \"id\": 9,\n            \"name\": \"Dokter THT\",\n            \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n            \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n        },\n        \"recommended_doctors\": [\n            {\n                \"id\": 5,\n                \"user_id\": 7,\n                \"specialty_id\": 9,\n                \"hospital_id\": 4,\n                \"experience_years\": 10,\n                \"consultation_fee\": 300000,\n                \"bio\": \"dr. Yosi Oktarina merupakan anggota dari Perhimpunan Telinga Hidung Tenggorok Bedah Kepala Leher Indonesia (PERHATI-KL). Adapun layanan kesehatan yang dapat Beliau berikan meliputi Konsultasi Kesehatan terkait telinga, hidung, dan tenggorokan.\",\n                \"is_active\": true,\n                \"created_at\": \"2026-06-19T08:46:48.723126Z\",\n                \"updated_at\": \"2026-06-19T08:46:48.723126Z\"\n            },\n            {\n                \"id\": 6,\n                \"user_id\": 8,\n                \"specialty_id\": 9,\n                \"hospital_id\": 5,\n                \"experience_years\": 5,\n                \"consultation_fee\": 300000,\n                \"bio\": \"currently advancing medical studies\",\n                \"is_active\": true,\n                \"created_at\": \"2026-06-19T08:47:43.27189Z\",\n                \"updated_at\": \"2026-06-19T15:02:11.78725Z\"\n            }\n        ],\n        \"ai_summary\": \"Pasien mengeluhkan telinga berdengung setelah terbentur meja.\"\n    },\n    \"message\": \"symptom analysis completed\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Doctors",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicGF0aWVudCIsInVzZXJfaWQiOjEzfQ.c9lVos9rQTySIE0bD3wWWiZaGE0JIKIX0oti2JfBTgA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/doctors",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctors"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Get All Doctors",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctors",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctors"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 02:45:47 GMT"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"user_id\": 3,\n            \"specialty_id\": 5,\n            \"hospital_id\": 1,\n            \"experience_years\": 19,\n            \"consultation_fee\": 350000,\n            \"bio\": \"dr. Benjamin Sastro, Sp.PD menamatkan pendidikan Spesialis Penyakit Dalam di Universitas Sam Ratulangi, Manado. Beliau juga tergabung dalam organisasi Perhimpunan Dokter Spesialis Penyakit Dalam Indonesia (PAPDI).\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T08:29:39.533135Z\",\n            \"updated_at\": \"2026-06-19T08:29:39.533135Z\",\n            \"user\": {\n                \"id\": 3,\n                \"full_name\": \"dr. Benjamin Sastro, Sp.PD\",\n                \"email\": \"benjamin@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T08:29:39.158735Z\",\n                \"updated_at\": \"2026-06-19T08:29:39.158735Z\"\n            },\n            \"specialty\": {\n                \"id\": 5,\n                \"name\": \"Dokter Penyakit Dalam\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 1,\n                \"name\": \"Mayapada Hospital Tangerang\",\n                \"address\": \"Tangerang, Tangerang\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 4,\n            \"specialty_id\": 10,\n            \"hospital_id\": 2,\n            \"experience_years\": 19,\n            \"consultation_fee\": 500000,\n            \"bio\": \"dr. Nana Agustina dapat memberikan bantuan pelayanan medis terkait konsultasi mengenai kesehatan Kebidanan dan Kandungan. Beliau juga merupakan Dokter yang terdaftar sebagai anggota dari Ikatan Dokter Indonesia (IDI) dan Perkumpulan Obstetri dan Ginekologi Indonesia (POGI).\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T08:36:41.278599Z\",\n            \"updated_at\": \"2026-06-19T08:36:41.278599Z\",\n            \"user\": {\n                \"id\": 4,\n                \"full_name\": \"dr. Nana Agustina, Sp.OG\",\n                \"email\": \"nana@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T08:36:40.927372Z\",\n                \"updated_at\": \"2026-06-19T08:36:40.927372Z\"\n            },\n            \"specialty\": {\n                \"id\": 10,\n                \"name\": \"Dokter Kandungan\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 2,\n                \"name\": \"RSIA Bunda Jakarta\",\n                \"address\": \"Menteng, Jakarta\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"user_id\": 5,\n            \"specialty_id\": 8,\n            \"hospital_id\": 5,\n            \"experience_years\": 19,\n            \"consultation_fee\": 500000,\n            \"bio\": \"dr. Pitra Ariesta Shinta Dewi, Sp.M merupakan anggota dari Ikatan Dokter Indonesia (IDI) dan Persatuan Dokter Spesialis Mata Indonesia (PERDAMI).\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T08:41:29.326907Z\",\n            \"updated_at\": \"2026-06-19T08:41:29.326907Z\",\n            \"user\": {\n                \"id\": 5,\n                \"full_name\": \"dr. Pitra Ariesta Shinta Dewi, Sp.M\",\n                \"email\": \"pitra@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T08:41:29.065512Z\",\n                \"updated_at\": \"2026-06-19T08:41:29.065512Z\"\n            },\n            \"specialty\": {\n                \"id\": 8,\n                \"name\": \"Dokter Mata\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 5,\n                \"name\": \"MRCCC Siloam Hospitals Semanggi\",\n                \"address\": \"Setiabudi, Jakarta\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        },\n        {\n            \"id\": 4,\n            \"user_id\": 6,\n            \"specialty_id\": 7,\n            \"hospital_id\": 5,\n            \"experience_years\": 13,\n            \"consultation_fee\": 400000,\n            \"bio\": \"dr. Caroline Padang, Sp.KK menamatkan pendidikan Spesialis Kulit dan Kelamin dari Universitas Indonesia. Selain itu, beliau juga merupakan anggota Perhimpunan Dokter Spesialis Kulit dan Kelamin Indonesia (PERDOSKI).\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T08:43:08.517558Z\",\n            \"updated_at\": \"2026-06-19T08:43:08.517558Z\",\n            \"user\": {\n                \"id\": 6,\n                \"full_name\": \"dr. Caroline Padang, Sp.KK\",\n                \"email\": \"caroline@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T08:43:08.254313Z\",\n                \"updated_at\": \"2026-06-19T08:43:08.254313Z\"\n            },\n            \"specialty\": {\n                \"id\": 7,\n                \"name\": \"Dokter Kulit dan Kelamin\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 5,\n                \"name\": \"MRCCC Siloam Hospitals Semanggi\",\n                \"address\": \"Setiabudi, Jakarta\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        },\n        {\n            \"id\": 5,\n            \"user_id\": 7,\n            \"specialty_id\": 9,\n            \"hospital_id\": 4,\n            \"experience_years\": 10,\n            \"consultation_fee\": 300000,\n            \"bio\": \"dr. Yosi Oktarina merupakan anggota dari Perhimpunan Telinga Hidung Tenggorok Bedah Kepala Leher Indonesia (PERHATI-KL). Adapun layanan kesehatan yang dapat Beliau berikan meliputi Konsultasi Kesehatan terkait telinga, hidung, dan tenggorokan.\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T08:46:48.723126Z\",\n            \"updated_at\": \"2026-06-19T08:46:48.723126Z\",\n            \"user\": {\n                \"id\": 7,\n                \"full_name\": \"dr. Yosi Oktarina, Sp.THT-KL\",\n                \"email\": \"yosi@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T08:46:48.462141Z\",\n                \"updated_at\": \"2026-06-19T08:46:48.462141Z\"\n            },\n            \"specialty\": {\n                \"id\": 9,\n                \"name\": \"Dokter THT\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 4,\n                \"name\": \"Alia Hospital Depok\",\n                \"address\": \"Pancoran Mas, Depok\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        },\n        {\n            \"id\": 6,\n            \"user_id\": 8,\n            \"specialty_id\": 9,\n            \"hospital_id\": 5,\n            \"experience_years\": 5,\n            \"consultation_fee\": 300000,\n            \"bio\": \"dr. Amalia Yuliasari menamatkan studi Spesialis Telinga Hidung Tenggorok di Universitas Indonesia. Selain itu, Beliau terhimpun dengan Ikatan Dokter Indonesia (IDI) dan Perhimpunan Telinga Hidung Tenggorok Bedah Kepala Leher Indonesia (PERHATI-KL).\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T08:47:43.27189Z\",\n            \"updated_at\": \"2026-06-19T08:47:43.27189Z\",\n            \"user\": {\n                \"id\": 8,\n                \"full_name\": \"dr. Amalia Yuliasari, Sp.THT-KL\",\n                \"email\": \"amalia@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T08:47:43.012824Z\",\n                \"updated_at\": \"2026-06-19T08:47:43.012824Z\"\n            },\n            \"specialty\": {\n                \"id\": 9,\n                \"name\": \"Dokter THT\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 5,\n                \"name\": \"MRCCC Siloam Hospitals Semanggi\",\n                \"address\": \"Setiabudi, Jakarta\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        },\n        {\n            \"id\": 7,\n            \"user_id\": 9,\n            \"specialty_id\": 4,\n            \"hospital_id\": 1,\n            \"experience_years\": 26,\n            \"consultation_fee\": 300000,\n            \"bio\": \"dr. Pudjo Rahasto berpraktik di Rumah Sakit Mayapada Tangerang sebagai Dokter Jantung dan Pembuluh Darah yang memiliki layanan medis, seperti: Pemeriksaan Jantung, Stress Test, Elektrokardiogram (EKG), Elektrokardiografi.\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T08:54:29.493551Z\",\n            \"updated_at\": \"2026-06-19T08:54:29.493551Z\",\n            \"user\": {\n                \"id\": 9,\n                \"full_name\": \"dr. Pudjo Rahasto, Sp.JP, FIHA\",\n                \"email\": \"pudjo@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T08:54:29.233319Z\",\n                \"updated_at\": \"2026-06-19T08:54:29.233319Z\"\n            },\n            \"specialty\": {\n                \"id\": 4,\n                \"name\": \"Dokter Jantung\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 1,\n                \"name\": \"Mayapada Hospital Tangerang\",\n                \"address\": \"Tangerang, Tangerang\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        },\n        {\n            \"id\": 8,\n            \"user_id\": 10,\n            \"specialty_id\": 3,\n            \"hospital_id\": 2,\n            \"experience_years\": 3,\n            \"consultation_fee\": 650000,\n            \"bio\": \"dr. Klara Yuliarti menempuh pendidikan Dokter Spesialis Anak di Universitas Indonesia. Beliau juga terdaftar sebagai anggota Ikatan Dokter Indonesia (IDI) dan Ikatan Dokter Anak Indonesia (IDAI).\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T08:58:21.043231Z\",\n            \"updated_at\": \"2026-06-19T08:58:21.043231Z\",\n            \"user\": {\n                \"id\": 10,\n                \"full_name\": \"dr. Klara Yuliarti, Sp.A (K)\",\n                \"email\": \"klara@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T08:58:20.780796Z\",\n                \"updated_at\": \"2026-06-19T08:58:20.780796Z\"\n            },\n            \"specialty\": {\n                \"id\": 3,\n                \"name\": \"Dokter Anak\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 2,\n                \"name\": \"RSIA Bunda Jakarta\",\n                \"address\": \"Menteng, Jakarta\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        },\n        {\n            \"id\": 9,\n            \"user_id\": 11,\n            \"specialty_id\": 2,\n            \"hospital_id\": 3,\n            \"experience_years\": 20,\n            \"consultation_fee\": 220000,\n            \"bio\": \"drg. Rahma Indira Wardani telah menamatkan studi Kedokteran Gigi di Fakultas Kedokteran Universitas Indonesia. Beliau juga merupakan anggota dari Persatuan Dokter Gigi indonesia (PDGI).\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T09:03:12.116711Z\",\n            \"updated_at\": \"2026-06-19T09:03:12.116711Z\",\n            \"user\": {\n                \"id\": 11,\n                \"full_name\": \"drg. Rahma Indira Wardani, Mars\",\n                \"email\": \"rahma@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T09:03:11.856389Z\",\n                \"updated_at\": \"2026-06-19T09:03:11.856389Z\"\n            },\n            \"specialty\": {\n                \"id\": 2,\n                \"name\": \"Dokter Gigi\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 3,\n                \"name\": \"RSU Bunda Margonda\",\n                \"address\": \"Beji, Depok\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        },\n        {\n            \"id\": 10,\n            \"user_id\": 12,\n            \"specialty_id\": 1,\n            \"hospital_id\": 4,\n            \"experience_years\": 4,\n            \"consultation_fee\": 300000,\n            \"bio\": \"dr. Dayu Satriani, Sp.PK, FISQua adalah alumnus Universitas Indonesia (UI) yang aktif sebagai dokter spesialis patologi klinik dan peneliti yang mempublikasikan berbagai riset medis sejak tahun 2022. Beliau juga memegang sertifikasi Fellow of the International Society for Quality in Health Care (FISQua) di bidang mutu layanan kesehatan.\",\n            \"is_active\": true,\n            \"created_at\": \"2026-06-19T09:08:35.737048Z\",\n            \"updated_at\": \"2026-06-19T09:08:35.737048Z\",\n            \"user\": {\n                \"id\": 12,\n                \"full_name\": \"dr.Dayu Satriani Sp.PK, FISQua\",\n                \"email\": \"dayu@medioxe.com\",\n                \"role\": \"doctor\",\n                \"created_at\": \"2026-06-19T09:08:35.473233Z\",\n                \"updated_at\": \"2026-06-19T09:08:35.473233Z\"\n            },\n            \"specialty\": {\n                \"id\": 1,\n                \"name\": \"Dokter Umum\",\n                \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n                \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n            },\n            \"hospital\": {\n                \"id\": 4,\n                \"name\": \"Alia Hospital Depok\",\n                \"address\": \"Pancoran Mas, Depok\",\n                \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n                \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n            }\n        }\n    ],\n    \"message\": \"doctors fetched successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Doctor By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicGF0aWVudCIsInVzZXJfaWQiOjEzfQ.c9lVos9rQTySIE0bD3wWWiZaGE0JIKIX0oti2JfBTgA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/doctors/4",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "doctors",
+                "4"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Get Doctor By ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctors/4",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctors",
+                    "4"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 02:46:52 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "985"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 4,\n        \"user_id\": 6,\n        \"specialty_id\": 7,\n        \"hospital_id\": 5,\n        \"experience_years\": 13,\n        \"consultation_fee\": 400000,\n        \"bio\": \"dr. Caroline Padang, Sp.KK menamatkan pendidikan Spesialis Kulit dan Kelamin dari Universitas Indonesia. Selain itu, beliau juga merupakan anggota Perhimpunan Dokter Spesialis Kulit dan Kelamin Indonesia (PERDOSKI).\",\n        \"is_active\": true,\n        \"created_at\": \"2026-06-19T08:43:08.517558Z\",\n        \"updated_at\": \"2026-06-19T08:43:08.517558Z\",\n        \"user\": {\n            \"id\": 6,\n            \"full_name\": \"dr. Caroline Padang, Sp.KK\",\n            \"email\": \"caroline@medioxe.com\",\n            \"role\": \"doctor\",\n            \"created_at\": \"2026-06-19T08:43:08.254313Z\",\n            \"updated_at\": \"2026-06-19T08:43:08.254313Z\"\n        },\n        \"specialty\": {\n            \"id\": 7,\n            \"name\": \"Dokter Kulit dan Kelamin\",\n            \"created_at\": \"2026-06-18T10:40:48.82035Z\",\n            \"updated_at\": \"2026-06-18T10:40:48.82035Z\"\n        },\n        \"hospital\": {\n            \"id\": 5,\n            \"name\": \"MRCCC Siloam Hospitals Semanggi\",\n            \"address\": \"Setiabudi, Jakarta\",\n            \"created_at\": \"2026-06-19T01:19:53.026881Z\",\n            \"updated_at\": \"2026-06-19T01:19:53.026881Z\"\n        }\n    },\n    \"message\": \"doctor fetched successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Doctor Schedule",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "200 Success Get Specific Doctor's Schedule",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/doctors/5/schedules",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "doctors",
+                    "5",
+                    "schedules"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 02:50:32 GMT"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": 14,\n            \"doctor_id\": 5,\n            \"date\": \"2026-06-22T00:00:00Z\",\n            \"start_time\": \"14:00:00\",\n            \"end_time\": \"15:00:00\",\n            \"is_booked\": false,\n            \"created_at\": \"2026-06-19T09:30:13.519756Z\",\n            \"updated_at\": \"2026-06-19T09:30:13.519756Z\",\n            \"doctor\": {\n                \"id\": 0,\n                \"user_id\": 0,\n                \"specialty_id\": 0,\n                \"hospital_id\": 0,\n                \"experience_years\": 0,\n                \"consultation_fee\": 0,\n                \"bio\": \"\",\n                \"is_active\": false,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\",\n                \"user\": {\n                    \"id\": 0,\n                    \"full_name\": \"\",\n                    \"email\": \"\",\n                    \"role\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"specialty\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"hospital\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"address\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                }\n            }\n        },\n        {\n            \"id\": 13,\n            \"doctor_id\": 5,\n            \"date\": \"2026-06-23T00:00:00Z\",\n            \"start_time\": \"10:00:00\",\n            \"end_time\": \"11:00:00\",\n            \"is_booked\": false,\n            \"created_at\": \"2026-06-19T09:30:03.792604Z\",\n            \"updated_at\": \"2026-06-19T09:30:03.792604Z\",\n            \"doctor\": {\n                \"id\": 0,\n                \"user_id\": 0,\n                \"specialty_id\": 0,\n                \"hospital_id\": 0,\n                \"experience_years\": 0,\n                \"consultation_fee\": 0,\n                \"bio\": \"\",\n                \"is_active\": false,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\",\n                \"user\": {\n                    \"id\": 0,\n                    \"full_name\": \"\",\n                    \"email\": \"\",\n                    \"role\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"specialty\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"hospital\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"address\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                }\n            }\n        },\n        {\n            \"id\": 11,\n            \"doctor_id\": 5,\n            \"date\": \"2026-06-24T00:00:00Z\",\n            \"start_time\": \"12:00:00\",\n            \"end_time\": \"13:00:00\",\n            \"is_booked\": false,\n            \"created_at\": \"2026-06-19T09:29:22.138716Z\",\n            \"updated_at\": \"2026-06-19T09:29:22.138716Z\",\n            \"doctor\": {\n                \"id\": 0,\n                \"user_id\": 0,\n                \"specialty_id\": 0,\n                \"hospital_id\": 0,\n                \"experience_years\": 0,\n                \"consultation_fee\": 0,\n                \"bio\": \"\",\n                \"is_active\": false,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\",\n                \"user\": {\n                    \"id\": 0,\n                    \"full_name\": \"\",\n                    \"email\": \"\",\n                    \"role\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"specialty\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"hospital\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"address\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                }\n            }\n        },\n        {\n            \"id\": 12,\n            \"doctor_id\": 5,\n            \"date\": \"2026-06-26T00:00:00Z\",\n            \"start_time\": \"16:00:00\",\n            \"end_time\": \"17:00:00\",\n            \"is_booked\": false,\n            \"created_at\": \"2026-06-19T09:29:35.904135Z\",\n            \"updated_at\": \"2026-06-19T09:29:35.904135Z\",\n            \"doctor\": {\n                \"id\": 0,\n                \"user_id\": 0,\n                \"specialty_id\": 0,\n                \"hospital_id\": 0,\n                \"experience_years\": 0,\n                \"consultation_fee\": 0,\n                \"bio\": \"\",\n                \"is_active\": false,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\",\n                \"user\": {\n                    \"id\": 0,\n                    \"full_name\": \"\",\n                    \"email\": \"\",\n                    \"role\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"specialty\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"hospital\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"address\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                }\n            }\n        },\n        {\n            \"id\": 15,\n            \"doctor_id\": 5,\n            \"date\": \"2026-06-28T00:00:00Z\",\n            \"start_time\": \"12:00:00\",\n            \"end_time\": \"13:00:00\",\n            \"is_booked\": false,\n            \"created_at\": \"2026-06-19T09:30:48.462751Z\",\n            \"updated_at\": \"2026-06-19T09:30:48.462751Z\",\n            \"doctor\": {\n                \"id\": 0,\n                \"user_id\": 0,\n                \"specialty_id\": 0,\n                \"hospital_id\": 0,\n                \"experience_years\": 0,\n                \"consultation_fee\": 0,\n                \"bio\": \"\",\n                \"is_active\": false,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\",\n                \"user\": {\n                    \"id\": 0,\n                    \"full_name\": \"\",\n                    \"email\": \"\",\n                    \"role\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"specialty\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"hospital\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"address\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                }\n            }\n        },\n        {\n            \"id\": 16,\n            \"doctor_id\": 5,\n            \"date\": \"2026-06-28T00:00:00Z\",\n            \"start_time\": \"13:00:00\",\n            \"end_time\": \"14:00:00\",\n            \"is_booked\": false,\n            \"created_at\": \"2026-06-19T09:30:54.00023Z\",\n            \"updated_at\": \"2026-06-19T09:30:54.00023Z\",\n            \"doctor\": {\n                \"id\": 0,\n                \"user_id\": 0,\n                \"specialty_id\": 0,\n                \"hospital_id\": 0,\n                \"experience_years\": 0,\n                \"consultation_fee\": 0,\n                \"bio\": \"\",\n                \"is_active\": false,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\",\n                \"user\": {\n                    \"id\": 0,\n                    \"full_name\": \"\",\n                    \"email\": \"\",\n                    \"role\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"specialty\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"hospital\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"address\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                }\n            }\n        }\n    ],\n    \"message\": \"doctor fetched successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Appointment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicGF0aWVudCIsInVzZXJfaWQiOjEzfQ.c9lVos9rQTySIE0bD3wWWiZaGE0JIKIX0oti2JfBTgA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"schedule_id\": 27,\r\n    \"notes\": \"nyeri dada saat berolahraga\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/appointments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "appointments"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Success Create Appointment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"schedule_id\": 27,\r\n    \"notes\": \"nyeri dada saat berolahraga\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/appointments",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "appointments"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 02:53:32 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1719"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"patient_id\": 13,\n        \"doctor_id\": 7,\n        \"schedule_id\": 27,\n        \"symptom_analysis_id\": null,\n        \"notes\": \"nyeri dada saat berolahraga\",\n        \"status\": \"pending\",\n        \"created_at\": \"2026-06-19T09:53:31.2102591+07:00\",\n        \"updated_at\": \"2026-06-19T09:53:31.2102591+07:00\",\n        \"patient\": {\n            \"id\": 0,\n            \"full_name\": \"\",\n            \"email\": \"\",\n            \"role\": \"\",\n            \"created_at\": \"0001-01-01T00:00:00Z\",\n            \"updated_at\": \"0001-01-01T00:00:00Z\"\n        },\n        \"doctor\": {\n            \"id\": 0,\n            \"user_id\": 0,\n            \"specialty_id\": 0,\n            \"hospital_id\": 0,\n            \"experience_years\": 0,\n            \"consultation_fee\": 0,\n            \"bio\": \"\",\n            \"is_active\": false,\n            \"created_at\": \"0001-01-01T00:00:00Z\",\n            \"updated_at\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": 0,\n                \"full_name\": \"\",\n                \"email\": \"\",\n                \"role\": \"\",\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"specialty\": {\n                \"id\": 0,\n                \"name\": \"\",\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"hospital\": {\n                \"id\": 0,\n                \"name\": \"\",\n                \"address\": \"\",\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            }\n        },\n        \"schedule\": {\n            \"id\": 0,\n            \"doctor_id\": 0,\n            \"date\": \"0001-01-01T00:00:00Z\",\n            \"start_time\": \"\",\n            \"end_time\": \"\",\n            \"is_booked\": false,\n            \"created_at\": \"0001-01-01T00:00:00Z\",\n            \"updated_at\": \"0001-01-01T00:00:00Z\",\n            \"doctor\": {\n                \"id\": 0,\n                \"user_id\": 0,\n                \"specialty_id\": 0,\n                \"hospital_id\": 0,\n                \"experience_years\": 0,\n                \"consultation_fee\": 0,\n                \"bio\": \"\",\n                \"is_active\": false,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\",\n                \"user\": {\n                    \"id\": 0,\n                    \"full_name\": \"\",\n                    \"email\": \"\",\n                    \"role\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"specialty\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                },\n                \"hospital\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"address\": \"\",\n                    \"created_at\": \"0001-01-01T00:00:00Z\",\n                    \"updated_at\": \"0001-01-01T00:00:00Z\"\n                }\n            }\n        },\n        \"symptom_analysis\": null\n    },\n    \"message\": \"appointment created successfully\"\n}"
+            },
+            {
+              "name": "400 invalid ScheduleID",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"schedule_id\": 99,\r\n    \"notes\": \"nyeri dada saat berolahraga\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/appointments",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "appointments"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:03:31 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "33"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"schedule not found\"\n}"
+            },
+            {
+              "name": "400 Schedule booked",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"schedule_id\": 27,\r\n    \"notes\": \"nyeri dada saat berolahraga\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/appointments",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "appointments"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 07:03:53 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "38"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"schedule already booked\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"full_name\": \"Raka Mancini\",\r\n  \"email\": \"raka@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"full_name\": \"Raka Mancini\",\r\n  \"email\": \"raka@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 07:33:18 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "228"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"full_name\": \"Raka Mancini\",\n        \"email\": \"raka@example.com\",\n        \"role\": \"patient\",\n        \"created_at\": \"2026-06-18T14:33:17.7838296+07:00\",\n        \"updated_at\": \"2026-06-18T14:33:17.7838296+07:00\"\n    },\n    \"message\": \"user registered successfully\"\n}"
+            },
+            {
+              "name": "400 Email already registered",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"full_name\": \"Raka Mancini\",\r\n  \"email\": \"raka@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 07:35:01 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "39"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"email already registered\"\n}"
+            },
+            {
+              "name": "400 Email password field validation",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"full_name\": \"Raka Mancini\",\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 07:35:39 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "203"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Key: 'RegisterInput.Email' Error:Field validation for 'Email' failed on the 'required' tag\\nKey: 'RegisterInput.Password' Error:Field validation for 'Password' failed on the 'required' tag\"\n}"
+            },
+            {
+              "name": "400 Invalid Email format",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"full_name\": \"test\",\r\n  \"email\": \"example.com\",\r\n  \"password\": \"password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:06:13 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "102"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Key: 'RegisterInput.Email' Error:Field validation for 'Email' failed on the 'email' tag\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"raka@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 Logged in",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"raka@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 07:56:06 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "172"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicGF0aWVudCIsInVzZXJfaWQiOjF9.2rtN5gXbv9SZKUAErXDDl5mP4i8b2vzCnRC3-1QTmvM\",\n    \"message\": \"login successfully\"\n}"
+            },
+            {
+              "name": "401 Wrong email password",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"salah@example.com\",\r\n  \"password\": \"salah123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 18 Jun 2026 07:57:32 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "40"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"invalid email or password\"\n}"
+            },
+            {
+              "name": "400 Missing email / Password",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 19 Jun 2026 06:07:02 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "197"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Key: 'LoginInput.Email' Error:Field validation for 'Email' failed on the 'required' tag\\nKey: 'LoginInput.Password' Error:Field validation for 'Password' failed on the 'required' tag\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
