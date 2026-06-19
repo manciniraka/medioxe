@@ -73,6 +73,10 @@ func (s *appointmentService) CreateAppointment(patientID int, input CreateAppoin
 	}
 
 	err = s.appointmentRepo.CreateAppointment(&appointment)
+	if err != nil {
+		return nil, err
+	}
+
 	_ = s.appointmentHistoryRepo.CreateAppointmentHistory(
 		&entity.AppointmentHistory{
 			AppointmentID: appointment.ID,
@@ -80,9 +84,6 @@ func (s *appointmentService) CreateAppointment(patientID int, input CreateAppoin
 			Remarks:       "Appointment created",
 		},
 	)
-	if err != nil {
-		return nil, err
-	}
 
 	schedule.IsBooked = true
 
