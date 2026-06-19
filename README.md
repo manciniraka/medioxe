@@ -114,20 +114,26 @@ Create `.env` file and configure:
 ```env
 APP_PORT=8080
 
-DB_HOST=
-DB_PORT=
-DB_USER=
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
 DB_PASSWORD=
-DB_NAME=
-DB_SSLMODE=
+DB_NAME=postgres
+DB_SSLMODE=require
 
 JWT_SECRET=
 
+GEMINI_BASE_URL=https://generativelanguage.googleapis.com
+GEMINI_MODEL=
 GEMINI_API_KEY=
+
+MIDTRANS_SERVER_KEY=
+MIDTRANS_CLIENT_KEY=
 
 MAILJET_BASE_URL=https://api.mailjet.com
 MAILJET_API_KEY=
 MAILJET_SECRET_KEY=
+
 MAILJET_SENDER_EMAIL=
 MAILJET_SENDER_NAME=
 ```
