@@ -1,8 +1,11 @@
 package router
 
 import (
+	"os"
+
 	"github.com/labstack/echo/v4"
 	geminiai "github.com/manciniraka/medioxe/external/geminiAI"
+	"github.com/manciniraka/medioxe/external/mailjet"
 	"github.com/manciniraka/medioxe/internal/controller"
 	"github.com/manciniraka/medioxe/internal/middleware"
 	"github.com/manciniraka/medioxe/internal/repository"
@@ -21,6 +24,16 @@ func InitRouter(
 	symptomAnalysisRepo := repository.NewSymptomAnalysisRepository(db)
 	appointmentRepo := repository.NewAppointmentRepository(db)
 
+	mailjetRepo := mailjet.NewMailjetRepository(
+		mailjet.MailjetConfig{
+			MailjetBaseURL:           os.Getenv("MAILJET_BASE_URL"),
+			MailjetBasicAuthUsername: os.Getenv("MAILJET_API_KEY"),
+			MailjetBasicAuthPassword: os.Getenv("MAILJET_SECRET_KEY"),
+			MailjetSenderEmail:       os.Getenv("MAILJET_SENDER_EMAIL"),
+			MailjetSenderName:        os.Getenv("MAILJET_SENDER_NAME"),
+		},
+	)
+
 	authService := service.NewAuthService(userRepo)
 	authController := controller.NewAuthController(authService)
 
@@ -37,6 +50,8 @@ func InitRouter(
 		appointmentRepo,
 		scheduleRepo,
 		doctorRepo,
+		userRepo,
+		mailjetRepo,
 	)
 	appointmentController := controller.NewAppointmentController(appointmentService)
 
@@ -65,7 +80,7 @@ func InitRouter(
 
 	auth.GET("/doctors/:id", doctorController.GetDoctorByID)
 
-	auth.GET("/doctors/:id", scheduleController.GetDoctorSchedules)
+	auth.GET("/doctors/:id/schedules", scheduleController.GetDoctorSchedules)
 
 	patient := e.Group("")
 
@@ -103,13 +118,13 @@ func InitRouter(
 
 	doctor.PUT("/doctor/profile", doctorController.UpdateMyProfile)
 
-	doctor.POST("/doctor/schedule", scheduleController.CreateSchedule)
+	doctor.POST("/doctor/schedules", scheduleController.CreateSchedule)
 
 	doctor.GET("/doctor/schedules", scheduleController.GetMySchedules)
 
-	doctor.PUT("/doctor/schedule/:id", scheduleController.UpdateSchedule)
+	doctor.PUT("/doctor/schedules/:id", scheduleController.UpdateSchedule)
 
-	doctor.DELETE("/doctor/schedule/:id", scheduleController.DeleteSchedule)
+	doctor.DELETE("/doctor/schedules/:id", scheduleController.DeleteSchedule)
 
 	doctor.GET("/doctor/appointments", appointmentController.GetDoctorAppointments)
 

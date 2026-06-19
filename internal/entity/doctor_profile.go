@@ -13,4 +13,8 @@ type DoctorProfile struct {
 	IsActive        bool      `json:"is_active"`
 	CreatedAt       time.Time `json:"created_at"`
 	UpdatedAt       time.Time `json:"updated_at"`
+
+	User      User      `json:"user" gorm:"foreignKey:UserID"`
+	Specialty Specialty `json:"specialty" gorm:"foreignKey:SpecialtyID"`
+	Hospital  Hospital  `json:"hospital" gorm:"foreignKey:HospitalID"`
 }

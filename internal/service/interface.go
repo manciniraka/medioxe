@@ -82,16 +82,23 @@ type AppointmentRepository interface {
 	UpdateAppointment(appointment *entity.Appointment) error
 }
 
-type AppointmentService interface{
+type AppointmentService interface {
 	CreateAppointment(patientID int, input CreateAppointmentInput) (*entity.Appointment, error)
 	GetMyAppointments(patientID int) ([]entity.Appointment, error)
 	GetDoctorAppointments(userID int) ([]entity.Appointment, error)
-	ConfirmAppointment(userID int, appointmentID int) error		
+	ConfirmAppointment(userID int, appointmentID int) error
 	CompleteAppointment(userID int, appointmentID int) error
 	CancelAppointment(userID int, appointmentID int) error
 }
 
-type PaymentService interface{}
+type NotificationRepository interface {
+	SendEmail(
+		toName string,
+		toEmail string,
+		subject string,
+		message string,
+	) error
+}
 
 type AIService interface {
 	AnalyzeSymptoms(patientID int, input SymptomAnalysisInput) (*SymptomAnalysisResponse, error)

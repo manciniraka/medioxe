@@ -23,17 +23,24 @@ type appointmentService struct {
 	appointmentRepo AppointmentRepository
 	scheduleRepo    ScheduleRepository
 	doctorRepo      DoctorRepository
+	userRepo        UserRepository
+
+	notificationRepo NotificationRepository
 }
 
 func NewAppointmentService(
 	appointmentRepo AppointmentRepository,
 	scheduleRepo ScheduleRepository,
 	doctorRepo DoctorRepository,
+	userRepo UserRepository,
+	notificationRepo NotificationRepository,
 ) AppointmentService {
 	return &appointmentService{
-		appointmentRepo: appointmentRepo,
-		scheduleRepo:    scheduleRepo,
-		doctorRepo:      doctorRepo,
+		appointmentRepo:  appointmentRepo,
+		scheduleRepo:     scheduleRepo,
+		doctorRepo:       doctorRepo,
+		userRepo:         userRepo,
+		notificationRepo: notificationRepo,
 	}
 }
 
@@ -71,6 +78,19 @@ func (s *appointmentService) CreateAppointment(patientID int, input CreateAppoin
 		return nil, err
 	}
 
+	patient, userErr := s.userRepo.GetByID(
+		patientID,
+	)
+
+	if userErr == nil {
+		_ = s.notificationRepo.SendEmail(
+			patient.FullName,
+			patient.Email,
+			"Appointment Created",
+			"Your appointment has been successfully created.",
+		)
+	}
+
 	return &appointment, nil
 }
 
@@ -104,9 +124,33 @@ func (s *appointmentService) ConfirmAppointment(userID int, appointmentID int) e
 		)
 	}
 
+	if appointment.Status != AppointmentPending {
+		return errors.New(
+			"appointment already processed",
+		)
+	}
+
 	appointment.Status = AppointmentConfirmed
 
-	return s.appointmentRepo.UpdateAppointment(appointment)
+	err = s.appointmentRepo.UpdateAppointment(appointment)
+	if err != nil {
+		return err
+	}
+
+	patient, userErr := s.userRepo.GetByID(
+		appointment.PatientID,
+	)
+
+	if userErr == nil {
+		_ = s.notificationRepo.SendEmail(
+			patient.FullName,
+			patient.Email,
+			"Appointment Confirmed",
+			"Your appointment has been confirmed.",
+		)
+	}
+
+	return nil
 }
 
 func (s *appointmentService) CompleteAppointment(userID int, appointmentID int) error {
@@ -126,9 +170,33 @@ func (s *appointmentService) CompleteAppointment(userID int, appointmentID int) 
 		)
 	}
 
+	if appointment.Status != AppointmentConfirmed {
+		return errors.New(
+			"appointment must be confirmed first",
+		)
+	}
+
 	appointment.Status = AppointmentCompleted
 
-	return s.appointmentRepo.UpdateAppointment(appointment)
+	err = s.appointmentRepo.UpdateAppointment(appointment)
+	if err != nil {
+		return err
+	}
+
+	patient, userErr := s.userRepo.GetByID(
+		appointment.PatientID,
+	)
+
+	if userErr == nil {
+		_ = s.notificationRepo.SendEmail(
+			patient.FullName,
+			patient.Email,
+			"Appointment Completed",
+			"Your appointment has been completed.",
+		)
+	}
+
+	return nil
 }
 
 func (s *appointmentService) CancelAppointment(userID int, appointmentID int) error {
@@ -148,7 +216,31 @@ func (s *appointmentService) CancelAppointment(userID int, appointmentID int) er
 		)
 	}
 
+	if appointment.Status == AppointmentCompleted {
+		return errors.New(
+			"completed appointment cannot be cancelled",
+		)
+	}
+
 	appointment.Status = AppointmentCancelled
 
-	return s.appointmentRepo.UpdateAppointment(appointment)
+	err = s.appointmentRepo.UpdateAppointment(appointment)
+	if err != nil {
+		return err
+	}
+
+	patient, userErr := s.userRepo.GetByID(
+		appointment.PatientID,
+	)
+
+	if userErr == nil {
+		_ = s.notificationRepo.SendEmail(
+			patient.FullName,
+			patient.Email,
+			"Appointment Cancelled",
+			"Your appointment has been cancelled.",
+		)
+	}
+
+	return nil
 }
