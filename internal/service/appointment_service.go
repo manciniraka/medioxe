@@ -20,27 +20,30 @@ type CreateAppointmentInput struct {
 }
 
 type appointmentService struct {
-	appointmentRepo AppointmentRepository
-	scheduleRepo    ScheduleRepository
-	doctorRepo      DoctorRepository
-	userRepo        UserRepository
+	appointmentRepo        AppointmentRepository
+	appointmentHistoryRepo AppointmentHistoryRepository
+	scheduleRepo           ScheduleRepository
+	doctorRepo             DoctorRepository
+	userRepo               UserRepository
 
 	notificationRepo NotificationRepository
 }
 
 func NewAppointmentService(
 	appointmentRepo AppointmentRepository,
+	appointmentHistoryRepo AppointmentHistoryRepository,
 	scheduleRepo ScheduleRepository,
 	doctorRepo DoctorRepository,
 	userRepo UserRepository,
 	notificationRepo NotificationRepository,
 ) AppointmentService {
 	return &appointmentService{
-		appointmentRepo:  appointmentRepo,
-		scheduleRepo:     scheduleRepo,
-		doctorRepo:       doctorRepo,
-		userRepo:         userRepo,
-		notificationRepo: notificationRepo,
+		appointmentRepo:        appointmentRepo,
+		appointmentHistoryRepo: appointmentHistoryRepo,
+		scheduleRepo:           scheduleRepo,
+		doctorRepo:             doctorRepo,
+		userRepo:               userRepo,
+		notificationRepo:       notificationRepo,
 	}
 }
 
@@ -67,6 +70,13 @@ func (s *appointmentService) CreateAppointment(patientID int, input CreateAppoin
 	}
 
 	err = s.appointmentRepo.CreateAppointment(&appointment)
+	_ = s.appointmentHistoryRepo.CreateAppointmentHistory(
+		&entity.AppointmentHistory{
+			AppointmentID: appointment.ID,
+			Status:        AppointmentPending,
+			Remarks:       "Appointment created",
+		},
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -133,6 +143,13 @@ func (s *appointmentService) ConfirmAppointment(userID int, appointmentID int) e
 	appointment.Status = AppointmentConfirmed
 
 	err = s.appointmentRepo.UpdateAppointment(appointment)
+	_ = s.appointmentHistoryRepo.CreateAppointmentHistory(
+		&entity.AppointmentHistory{
+			AppointmentID: appointment.ID,
+			Status:        AppointmentConfirmed,
+			Remarks:       "Appointment confirmed",
+		},
+	)
 	if err != nil {
 		return err
 	}
@@ -179,6 +196,13 @@ func (s *appointmentService) CompleteAppointment(userID int, appointmentID int) 
 	appointment.Status = AppointmentCompleted
 
 	err = s.appointmentRepo.UpdateAppointment(appointment)
+	_ = s.appointmentHistoryRepo.CreateAppointmentHistory(
+		&entity.AppointmentHistory{
+			AppointmentID: appointment.ID,
+			Status:        AppointmentCompleted,
+			Remarks:       "Appointment completed",
+		},
+	)
 	if err != nil {
 		return err
 	}
@@ -225,6 +249,13 @@ func (s *appointmentService) CancelAppointment(userID int, appointmentID int) er
 	appointment.Status = AppointmentCancelled
 
 	err = s.appointmentRepo.UpdateAppointment(appointment)
+	_ = s.appointmentHistoryRepo.CreateAppointmentHistory(
+		&entity.AppointmentHistory{
+			AppointmentID: appointment.ID,
+			Status:        AppointmentCancelled,
+			Remarks:       "Appointment cancelled",
+		},
+	)
 	if err != nil {
 		return err
 	}
@@ -243,4 +274,12 @@ func (s *appointmentService) CancelAppointment(userID int, appointmentID int) er
 	}
 
 	return nil
+}
+
+func (s *appointmentService) GetAppointmentHistory(appointmentID int) ([]entity.AppointmentHistory, error) {
+	return s.appointmentHistoryRepo.GetByAppointmentID(appointmentID)
+}
+
+func (s *appointmentService) GetAll() ([]entity.AppointmentHistory, error) {
+	return s.appointmentHistoryRepo.GetAll()
 }

@@ -82,6 +82,12 @@ type AppointmentRepository interface {
 	UpdateAppointment(appointment *entity.Appointment) error
 }
 
+type AppointmentHistoryRepository interface {
+	CreateAppointmentHistory(history *entity.AppointmentHistory) error
+	GetByAppointmentID(appointmentID int) ([]entity.AppointmentHistory, error)
+	GetAll() ([]entity.AppointmentHistory, error)
+}
+
 type AppointmentService interface {
 	CreateAppointment(patientID int, input CreateAppointmentInput) (*entity.Appointment, error)
 	GetMyAppointments(patientID int) ([]entity.Appointment, error)
@@ -89,6 +95,8 @@ type AppointmentService interface {
 	ConfirmAppointment(userID int, appointmentID int) error
 	CompleteAppointment(userID int, appointmentID int) error
 	CancelAppointment(userID int, appointmentID int) error
+	GetAppointmentHistory(appointmentID int) ([]entity.AppointmentHistory, error)
+	GetAll() ([]entity.AppointmentHistory, error)
 }
 
 type NotificationRepository interface {

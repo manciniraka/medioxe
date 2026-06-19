@@ -23,6 +23,7 @@ func InitRouter(
 	scheduleRepo := repository.NewScheduleRepository(db)
 	symptomAnalysisRepo := repository.NewSymptomAnalysisRepository(db)
 	appointmentRepo := repository.NewAppointmentRepository(db)
+	appointmentHistoryRepo := repository.NewAppointmentHistoryRepository(db)
 
 	mailjetRepo := mailjet.NewMailjetRepository(
 		mailjet.MailjetConfig{
@@ -48,6 +49,7 @@ func InitRouter(
 
 	appointmentService := service.NewAppointmentService(
 		appointmentRepo,
+		appointmentHistoryRepo,
 		scheduleRepo,
 		doctorRepo,
 		userRepo,
@@ -94,6 +96,7 @@ func InitRouter(
 	patient.POST("/appointments", appointmentController.CreateAppointment)
 
 	patient.GET("/appointments", appointmentController.GetMyAppointments)
+	patient.GET("/appointments/:id/history", appointmentController.GetAppointmentHistory)
 
 	admin := e.Group("/admin")
 
@@ -107,6 +110,9 @@ func InitRouter(
 	admin.PUT("/doctors/:id", doctorController.UpdateDoctor)
 	admin.PATCH("/doctors/:id/activate", doctorController.ActivateDoctor)
 	admin.PATCH("/doctors/:id/deactivate", doctorController.DeactivateDoctor)
+
+	admin.GET("/appointment-histories", appointmentController.GetAllAppointmentHistories)
+	admin.GET("/appointments/:id/history", appointmentController.GetAppointmentHistory)
 
 	doctor := e.Group("")
 	doctor.Use(

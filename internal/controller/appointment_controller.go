@@ -190,3 +190,50 @@ func (ac *AppointmentController) CancelAppointment(c echo.Context) error {
 		},
 	)
 }
+
+func (ac *AppointmentController) GetAppointmentHistory(c echo.Context) error {
+	appointmentID, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return c.JSON(
+			http.StatusBadRequest,
+			echo.Map{
+				"message": "invalid appointment id",
+			},
+		)
+	}
+
+	history, err := ac.appointmentService.GetAppointmentHistory(appointmentID)
+	if err != nil {
+		return helper.InternalServerError(
+			c,
+			err,
+		)
+	}
+
+	return c.JSON(
+		http.StatusOK,
+		echo.Map{
+			"message": "appointment history fetched successfully",
+			"data":    history,
+		},
+	)
+}
+
+func (ac *AppointmentController) GetAllAppointmentHistories(c echo.Context) error {
+	histories, err := ac.appointmentService.GetAll()
+
+	if err != nil {
+		return helper.InternalServerError(
+			c,
+			err,
+		)
+	}
+
+	return c.JSON(
+		http.StatusOK,
+		echo.Map{
+			"message": "appointment histories fetched successfully",
+			"data":    histories,
+		},
+	)
+}
