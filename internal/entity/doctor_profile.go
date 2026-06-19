@@ -14,7 +14,7 @@ type DoctorProfile struct {
 	CreatedAt       time.Time `json:"created_at"`
 	UpdatedAt       time.Time `json:"updated_at"`
 
-	User      User      `json:"user" gorm:"foreignKey:UserID"`
-	Specialty Specialty `json:"specialty" gorm:"foreignKey:SpecialtyID"`
-	Hospital  Hospital  `json:"hospital" gorm:"foreignKey:HospitalID"`
+	User      *User      `json:"user,omitempty" gorm:"foreignKey:UserID"`
+	Specialty *Specialty `json:"specialty,omitempty" gorm:"foreignKey:SpecialtyID"`
+	Hospital  *Hospital  `json:"hospital,omitempty" gorm:"foreignKey:HospitalID"`
 }

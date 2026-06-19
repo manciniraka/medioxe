@@ -40,6 +40,19 @@ func (s *scheduleService) CreateSchedule(userID int, input CreateScheduleInput) 
 		return nil, err
 	}
 
+	if input.EndTime <= input.StartTime {
+		return nil, errors.New(
+			"end time must be greater than start time",
+		)
+	}
+
+	today := time.Now().Truncate(24 * time.Hour)
+	if input.Date.Before(today) {
+		return nil, errors.New(
+			"schedule date cannot be in the past",
+		)
+	}
+
 	schedule := entity.Schedule{
 		DoctorID:  doctor.ID,
 		Date:      input.Date,
@@ -77,6 +90,19 @@ func (s *scheduleService) UpdateSchedule(
 	doctor, err := s.doctorRepo.GetByUserID(userID)
 	if err != nil {
 		return nil, err
+	}
+
+	if input.EndTime <= input.StartTime {
+		return nil, errors.New(
+			"end time must be greater than start time",
+		)
+	}
+
+	today := time.Now().Truncate(24 * time.Hour)
+	if input.Date.Before(today) {
+		return nil, errors.New(
+			"schedule date cannot be in the past",
+		)
 	}
 
 	schedule, err := s.scheduleRepo.GetByID(scheduleID)

@@ -46,7 +46,9 @@ func (dc *DoctorController) CreateDoctor(c echo.Context) error {
 	doctor, err := dc.doctorService.CreateDoctor(input)
 	if err != nil {
 
-		if err.Error() == "email already registered" {
+		if err.Error() == "email already registered" ||
+			err.Error() == "specialty not found" ||
+			err.Error() == "hospital not found" {
 			return c.JSON(
 				http.StatusBadRequest,
 				echo.Map{

@@ -13,8 +13,8 @@ type Appointment struct {
 	CreatedAt         time.Time `json:"created_at"`
 	UpdatedAt         time.Time `json:"updated_at"`
 
-	Patient         User             `json:"patient" gorm:"foreignKey:PatientID"`
-	Doctor          DoctorProfile    `json:"doctor" gorm:"foreignKey:DoctorID"`
-	Schedule        Schedule         `json:"schedule" gorm:"foreignKey:ScheduleID"`
+	Patient         *User            `json:"patient,omitempty" gorm:"foreignKey:PatientID"`
+	Doctor          *DoctorProfile   `json:"doctor,omitempty" gorm:"foreignKey:DoctorID"`
+	Schedule        *Schedule        `json:"schedule,omitempty" gorm:"foreignKey:ScheduleID"`
 	SymptomAnalysis *SymptomAnalysis `json:"symptom_analysis" gorm:"foreignKey:SymptomAnalysisID"`
 }

@@ -12,5 +12,5 @@ type Schedule struct {
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 
-	Doctor DoctorProfile `json:"doctor" gorm:"foreignKey:DoctorID"`
+	Doctor *DoctorProfile `json:"doctor,omitempty" gorm:"foreignKey:DoctorID"`
 }

@@ -46,9 +46,11 @@ func (sc *ScheduleController) CreateSchedule(c echo.Context) error {
 
 	schedule, err := sc.scheduleService.CreateSchedule(userID, input)
 	if err != nil {
-		return helper.InternalServerError(
-			c,
-			err,
+		return c.JSON(
+			http.StatusBadRequest,
+			echo.Map{
+				"message": err.Error(),
+			},
 		)
 	}
 
@@ -141,9 +143,11 @@ func (sc *ScheduleController) UpdateSchedule(c echo.Context) error {
 		input,
 	)
 	if err != nil {
-		return helper.InternalServerError(
-			c,
-			err,
+		return c.JSON(
+			http.StatusBadRequest,
+			echo.Map{
+				"message": err.Error(),
+			},
 		)
 	}
 

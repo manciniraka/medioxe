@@ -23,6 +23,11 @@ type SpecialtyRepository interface {
 	GetByName(name string) (*entity.Specialty, error)
 }
 
+type HospitalRepository interface {
+	GetAll() ([]entity.Hospital, error)
+	GetByID(id int) (*entity.Hospital, error)
+}
+
 type DoctorRepository interface {
 	CreateDoctor(profile *entity.DoctorProfile) error
 	GetAll() ([]entity.DoctorProfile, error)

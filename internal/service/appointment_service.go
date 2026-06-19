@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/manciniraka/medioxe/internal/entity"
+	"gorm.io/gorm"
 )
 
 const (
@@ -50,7 +51,9 @@ func NewAppointmentService(
 func (s *appointmentService) CreateAppointment(patientID int, input CreateAppointmentInput) (*entity.Appointment, error) {
 	schedule, err := s.scheduleRepo.GetByID(input.ScheduleID)
 	if err != nil {
-		return nil, err
+		return nil, errors.New(
+			"schedule not found",
+		)
 	}
 
 	if schedule.IsBooked {
@@ -125,7 +128,14 @@ func (s *appointmentService) ConfirmAppointment(userID int, appointmentID int) e
 
 	appointment, err := s.appointmentRepo.GetByID(appointmentID)
 	if err != nil {
-		return err
+		if errors.Is(
+			err,
+			gorm.ErrRecordNotFound,
+		) {
+			return errors.New(
+				"appointment not found",
+			)
+		}
 	}
 
 	if appointment.DoctorID != doctor.ID {
@@ -178,7 +188,14 @@ func (s *appointmentService) CompleteAppointment(userID int, appointmentID int) 
 
 	appointment, err := s.appointmentRepo.GetByID(appointmentID)
 	if err != nil {
-		return err
+		if errors.Is(
+			err,
+			gorm.ErrRecordNotFound,
+		) {
+			return errors.New(
+				"appointment not found",
+			)
+		}
 	}
 
 	if appointment.DoctorID != doctor.ID {
@@ -231,7 +248,14 @@ func (s *appointmentService) CancelAppointment(userID int, appointmentID int) er
 
 	appointment, err := s.appointmentRepo.GetByID(appointmentID)
 	if err != nil {
-		return err
+		if errors.Is(
+			err,
+			gorm.ErrRecordNotFound,
+		) {
+			return errors.New(
+				"appointment not found",
+			)
+		}
 	}
 
 	if appointment.DoctorID != doctor.ID {

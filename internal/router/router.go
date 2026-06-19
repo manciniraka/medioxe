@@ -24,6 +24,7 @@ func InitRouter(
 	symptomAnalysisRepo := repository.NewSymptomAnalysisRepository(db)
 	appointmentRepo := repository.NewAppointmentRepository(db)
 	appointmentHistoryRepo := repository.NewAppointmentHistoryRepository(db)
+	hospitalRepo := repository.NewHospitalRepository(db)
 
 	mailjetRepo := mailjet.NewMailjetRepository(
 		mailjet.MailjetConfig{
@@ -41,7 +42,12 @@ func InitRouter(
 	userService := service.NewUserService(userRepo)
 	userController := controller.NewUserController(userService)
 
-	doctorService := service.NewDoctorService(doctorRepo, userRepo)
+	doctorService := service.NewDoctorService(
+		doctorRepo,
+		userRepo,
+		specialtyRepo,
+		hospitalRepo,
+	)
 	doctorController := controller.NewDoctorController(doctorService)
 
 	scheduleService := service.NewScheduleService(scheduleRepo, doctorRepo)

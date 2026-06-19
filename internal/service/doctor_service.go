@@ -13,22 +13,24 @@ type CreateDoctorInput struct {
 	Password        string `json:"password" validate:"required"`
 	SpecialtyID     int    `json:"specialty_id" validate:"required"`
 	HospitalID      int    `json:"hospital_id" validate:"required"`
-	ExperienceYears int    `json:"experience_years" validate:"required"`
-	ConsultationFee int    `json:"consultation_fee" validate:"required"`
+	ExperienceYears int    `json:"experience_years" validate:"required,gte=0"`
+	ConsultationFee int    `json:"consultation_fee" validate:"required,gt=0"`
 	Bio             string `json:"bio" validate:"required"`
 }
 
 type UpdateDoctorInput struct {
-	SpecialtyID     int    `json:"specialty_id"`
-	HospitalID      int    `json:"hospital_id"`
-	ExperienceYears int    `json:"experience_years"`
-	ConsultationFee int    `json:"consultation_fee"`
-	Bio             string `json:"bio"`
+	SpecialtyID     int    `json:"specialty_id" validate:"required"`
+	HospitalID      int    `json:"hospital_id" validate:"required"`
+	ExperienceYears int    `json:"experience_years" validate:"required,gte=0"`
+	ConsultationFee int    `json:"consultation_fee" validate:"required,gt=0"`
+	Bio             string `json:"bio" validate:"required"`
 }
 
 type doctorService struct {
-	doctorRepo DoctorRepository
-	userRepo   UserRepository
+	doctorRepo    DoctorRepository
+	userRepo      UserRepository
+	specialtyRepo SpecialtyRepository
+	hospitalRepo  HospitalRepository
 }
 
 type UpdateMyProfileInput struct {
@@ -39,10 +41,14 @@ type UpdateMyProfileInput struct {
 func NewDoctorService(
 	doctorRepo DoctorRepository,
 	userRepo UserRepository,
+	specialtyRepo SpecialtyRepository,
+	hospitalRepo HospitalRepository,
 ) DoctorService {
 	return &doctorService{
-		doctorRepo: doctorRepo,
-		userRepo:   userRepo,
+		doctorRepo:    doctorRepo,
+		userRepo:      userRepo,
+		specialtyRepo: specialtyRepo,
+		hospitalRepo:  hospitalRepo,
 	}
 }
 
@@ -52,6 +58,20 @@ func (s *doctorService) CreateDoctor(input CreateDoctorInput) (*entity.DoctorPro
 	if existingUser != nil {
 		return nil,
 			errors.New("email already registered")
+	}
+
+	_, err := s.specialtyRepo.GetByID(input.SpecialtyID)
+	if err != nil {
+		return nil, errors.New(
+			"specialty not found",
+		)
+	}
+
+	_, err = s.hospitalRepo.GetByID(input.HospitalID)
+	if err != nil {
+		return nil, errors.New(
+			"hospital not found",
+		)
 	}
 
 	hashedPassword, err := password.Hash(input.Password)

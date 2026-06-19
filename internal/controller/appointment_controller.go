@@ -46,9 +46,11 @@ func (ac *AppointmentController) CreateAppointment(c echo.Context) error {
 
 	appointment, err := ac.appointmentService.CreateAppointment(patientID, input)
 	if err != nil {
-		return helper.InternalServerError(
-			c,
-			err,
+		return c.JSON(
+			http.StatusBadRequest,
+			echo.Map{
+				"message": err.Error(),
+			},
 		)
 	}
 
@@ -117,6 +119,17 @@ func (ac *AppointmentController) ConfirmAppointment(c echo.Context) error {
 
 	err = ac.appointmentService.ConfirmAppointment(userID, appointmentID)
 	if err != nil {
+		if err.Error() == "appointment not found" ||
+			err.Error() == "appointment already processed" ||
+			err.Error() == "you are not allowed to access this appointment" {
+			return c.JSON(
+				http.StatusBadRequest,
+				echo.Map{
+					"message": err.Error(),
+				},
+			)
+		}
+
 		return helper.InternalServerError(
 			c,
 			err,
@@ -147,6 +160,18 @@ func (ac *AppointmentController) CompleteAppointment(c echo.Context) error {
 
 	err = ac.appointmentService.CompleteAppointment(userID, appointmentID)
 	if err != nil {
+		if err.Error() == "appointment not found" ||
+			err.Error() == "appointment already processed" ||
+			err.Error() == "appointment must be confirmed first" ||
+			err.Error() == "you are not allowed to access this appointment" {
+			return c.JSON(
+				http.StatusBadRequest,
+				echo.Map{
+					"message": err.Error(),
+				},
+			)
+		}
+
 		return helper.InternalServerError(
 			c,
 			err,
@@ -177,6 +202,18 @@ func (ac *AppointmentController) CancelAppointment(c echo.Context) error {
 
 	err = ac.appointmentService.CancelAppointment(userID, appointmentID)
 	if err != nil {
+		if err.Error() == "appointment not found" ||
+			err.Error() == "appointment already processed" ||
+			err.Error() == "completed appointment cannot be cancelled" ||
+			err.Error() == "you are not allowed to access this appointment" {
+			return c.JSON(
+				http.StatusBadRequest,
+				echo.Map{
+					"message": err.Error(),
+				},
+			)
+		}
+
 		return helper.InternalServerError(
 			c,
 			err,
